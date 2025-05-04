@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - FURIA Know Your Fan</title>
+    <link rel="stylesheet" href="/public/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container header-container">
+            <div class="logo">
+                <img src="/img/FURIAlogo.png" alt="FURIA Logo">
+            </div>
+            
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="#profile-section">Perfil</a></li>
+                    <li><a href="#insights-section">Insights</a></li>
+                    <li><a href="#recommendations-section">Recomendações</a></li>
+                    <li><a href="{{ url_for('logout') }}" class="nav-logout">Sair</a></li>
+                </ul>
+            </nav>
+            <img src="/img/KnowYourFan.png" alt="Know Your Fan" class="header-image">
+        </div>
+    </header>
+
+    <main>
+        <section class="dashboard-welcome">
+            <div class="container">
+                <div class="welcome-header">
+                    <div class="user-avatar">
+                        {% if user.photo_path %}
+                        <img src="{{ url_for('static', filename=user.photo_path) }}" alt="Foto de Perfil">
+                        {% else %}
+                        <div class="avatar-placeholder">
+                            {{ user.name[0] }}
+                        </div>
+                        {% endif %}
+                    </div>
+                    <div class="welcome-text">
+                        <h2>Bem-vindo(a), {{ user.name.split()[0] }}!</h2>
+                        <p>Seu perfil de fã da FURIA está pronto. Confira seus insights e recomendações exclusivas.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="profile-section" class="dashboard-profile">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Seu Perfil de Fã</h2>
+                    <p>Resumo das suas informações e preferências</p>
+                </div>
+
+                <div class="profile-cards">
+                    <div class="profile-card">
+                        <h3>Dados Pessoais</h3>
+                        <ul class="profile-info">
+                            <li><strong>Nome:</strong> {{ user.name }}</li>
+                            <li><strong>Email:</strong> {{ user.email }}</li>
+                            <li><strong>Membro desde:</strong> {{ user.registration_date }}</li>
+                            <li><strong>Status de Verificação:</strong> 
+                                {% if user.identity_verified %}
+                                <span class="verified">Verificado ✓</span>
+                                {% else %}
+                                <span class="not-verified">Pendente</span>
+                                {% endif %}
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="profile-card">
+                        <h3>Preferências de Games</h3>
+                        <div class="game-tags">
+                            {% for game in user.favorite_games %}
+                            <span class="game-tag">{{ game }}</span>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                    <div class="profile-card">
+                        <h3>Experiências com a FURIA</h3>
+                        <div class="experience-list">
+                            {% if user.events_attended %}
+                                {% for event in user.events_attended %}
+                                <div class="experience-item">
+                                    <span class="experience-icon">🏆</span>
+                                    <span class="experience-name">{{ event }}</span>
+                                </div>
+                                {% endfor %}
+                            {% else %}
+                                <p>Nenhum evento registrado ainda.</p>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <div class="profile-card">
+                        <h3>Redes Sociais Conectadas</h3>
+                        <div class="social-connections">
+                            {% if user.social_profiles %}
+                                {% for platform, username in user.social_profiles.items() %}
+                                    {% if username %}
+                                    <div class="social-connection-item">
+                                        <span class="social-platform-icon">
+                                            {% if platform == 'twitter' %}𝕏
+                                            {% elif platform == 'instagram' %}📷
+                                            {% elif platform == 'facebook' %}👍
+                                            {% elif platform == 'twitch' %}📺
+                                            {% endif %}
+                                        </span>
+                                        <span class="social-username">{{ username }}</span>
+                                    </div>
+                                    {% endif %}
+                                {% endfor %}
+                            {% else %}
+                                <p>Nenhuma rede social conectada.</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="insights-section" class="dashboard-insights">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Seus Insights</h2>
+                    <p>Análise do seu perfil como fã da FURIA</p>
+                </div>
+
+                <div class="insights-grid">
+                    {% if user.profile_analysis %}
+                    <div class="insight-card">
+                        <h3>Nível de Engajamento</h3>
+                        <div class="progress-bar">
+                            <div class="progress" style="width: {{ user.profile_analysis.engagement_score }}%"></div>
+                        </div>
+                        <p class="progress-value">{{ user.profile_analysis.engagement_score }}%</p>
+                    </div>
+
+                    <div class="insight-card">
+                        <h3>Afinidade com a FURIA</h3>
+                        <div class="progress-bar">
+                            <div class="progress" style="width: {{ user.profile_analysis.furia_affinity }}%"></div>
+                        </div>
+                        <p class="progress-value">{{ user.profile_analysis.furia_affinity }}%</p>
+                    </div>
+
+                    <div class="insight-card">
+                        <h3>Relevância de Conteúdo</h3>
+                        <div class="progress-bar">
+                            <div class="progress" style="width: {{ user.profile_analysis.content_relevance }}%"></div>
+                        </div>
+                        <p class="progress-value">{{ user.profile_analysis.content_relevance }}%</p>
+                    </div>
+                    {% else %}
+                    <div class="insight-card empty">
+                        <h3>Análise em Andamento</h3>
+                        <p>Estamos processando seus dados para gerar insights personalizados. Isso pode levar alguns instantes.</p>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </section>
+
+        <section id="recommendations-section" class="dashboard-recommendations">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Recomendações Personalizadas</h2>
+                    <p>Com base no seu perfil de fã, recomendamos:</p>
+                </div>
+
+                <div class="recommendations-grid">
+                    <div class="recommendation-card">
+                        <div class="recommendation-icon">🎪</div>
+                        <h3>Eventos Recomendados</h3>
+                        <ul class="recommendation-list">
+                            {% for event in insights.recommended_events %}
+                            <li>{{ event }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+
+                    <div class="recommendation-card">
+                        <div class="recommendation-icon">👕</div>
+                        <h3>Produtos Recomendados</h3>
+                        <ul class="recommendation-list">
+                            {% for product in insights.merchandise_recommendations %}
+                            <li>{{ product }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+
+                    <div class="recommendation-card">
+                        <div class="recommendation-icon">📱</div>
+                        <h3>Conteúdos de Interesse</h3>
+                        <ul class="recommendation-list">
+                            {% for content in insights.content_preferences %}
+                            <li>{{ content }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+
+                    <div class="recommendation-card">
+                        <div class="recommendation-icon">🤝</div>
+                        <h3>Oportunidades de Engajamento</h3>
+                        <ul class="recommendation-list">
+                            {% for opportunity in insights.engagement_opportunities %}
+                            <li>{{ opportunity }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="dashboard-cta">
+            <div class="container">
+                <h2>Mantenha seu perfil atualizado!</h2>
+                <p>Quanto mais informações você nos fornecer, mais personalizadas serão suas recomendações e experiências.</p>
+                <a href="#" class="btn btn-primary">Atualizar Perfil</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-texto">
+                <p>Desenvolvido por: <a href="https://www.linkedin.com/in/murilo-vasconcelos-de-oliveira-5512b1265/" target="_blank">Murilo Vasconcelos de Oliveira</a></p>
+                <p>© 2025 Furia. Todos os direitos reservados.</p>
+            </div>
+            <div class="social-icons">
+                <a href="https://www.twitch.tv/team/furia" target="_blank"><i class="fa-brands fa-twitch"></i></a>
+                <a href="https://x.com/FURIA" target="_blank"><i class="fa-brands fa-x-twitter"></i></a>
+                <a href="https://www.instagram.com/furiagg/" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+                <a href="https://www.youtube.com/@FURIAgg" target="_blank"><i class="fa-brands fa-youtube"></i></a>
+            </div>
+        </div>
+        
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
