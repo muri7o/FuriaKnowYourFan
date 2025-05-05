@@ -315,6 +315,53 @@ h1, h2, h3, h4, h5, h6 {
     margin-top: 30px;
 }
 
+.main-nav {
+    background-color: var(--secondary-color);
+    padding: 15px 0;
+    box-shadow: var(--box-shadow);
+}
+
+.main-nav ul {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.main-nav li {
+    margin: 0 20px;
+}
+
+.main-nav a {
+    color: var(--light-color);
+    font-size: 16px;
+    text-decoration: none;
+    font-weight: 500;
+    padding: 10px 15px;
+    border-radius: var(--border-radius);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.main-nav a:hover {
+    background-color: var(--blue-600);
+    color: var(--light-color);
+}
+
+.nav-logout {
+    color: var(--light-color);
+    padding: 10px 15px;
+    border-radius: var(--border-radius);
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.nav-logout:hover {
+    color: var(--blue-700);
+}
+
+
 .social-buttons {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -370,7 +417,7 @@ h1, h2, h3, h4, h5, h6 {
     align-items: center;
     justify-content: center;
     border-radius: 50%;
-    background-color: #f5f5f5;
+    background-color: var(--gray-900);
 }
 
 .social-info {
@@ -467,6 +514,10 @@ h1, h2, h3, h4, h5, h6 {
     font-size: 18px;
 }
 
+.dashboard-recommendations{
+    color: var(--gray-900);
+}
+
 .dashboard-profile, .dashboard-insights, .dashboard-recommendations {
     padding: 60px 0;
 }
@@ -487,6 +538,10 @@ h1, h2, h3, h4, h5, h6 {
 
 .profile-card{
     color: var(--gray-800);
+}
+
+.insight-card{
+    color: var(--gray-900);
 }
 
 .profile-card, .insight-card, .recommendation-card {
