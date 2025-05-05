@@ -1,29 +1,37 @@
-# Furia Know Your Fan
+# FuriaKnowYourFan
 
-Este projeto é uma solução para conhecer melhor os fãs de esports, com foco na FURIA, utilizando coleta de dados, integração com redes sociais e validação de identidade com IA.
+Aplicativo de coleta de dados para conhecer os fãs de esports, desenvolvido para o processo seletivo da FURIA. O projeto utiliza HTML, CSS e JavaScript para a interface, com integração futura para backend (não implementado ainda).
 
-## Objetivo
+## 🌐 Demonstração
 
-Desenvolver um aplicativo ou solução para coletar informações detalhadas sobre o fã de esports, oferecendo uma experiência personalizada e serviços exclusivos.
+Acesse a versão online do projeto aqui: [muri7o.github.io/FuriaKnowYourFan](https://muri7o.github.io/FuriaKnowYourFan)
 
-## Funcionalidades
+## 📁 Estrutura do Projeto
 
-1. **Coleta de Dados Pessoais:**
-   - Nome, endereço, CPF.
-   - Informações sobre interesses, atividades e compras do último ano.
+- **index.html**: Página inicial do aplicativo.
+- **dashboard.html**: Página do painel do usuário com informações coletadas.
+- **perfil.html**: Página com o perfil detalhado do usuário.
+- **register.html**: Página de cadastro de dados do usuário.
+- **public/style.css**: Estilos e layout responsivo.
+- **public/main.js**: Lógica JavaScript para interação com o usuário e manipulação de dados.
+- **img/**: Imagens utilizadas na interface.
 
-2. **Upload de Documentos:**
-   - Funcionalidade para o usuário realizar o upload de documentos, com validação de identidade utilizando IA.
+## 🧠 Funcionalidades
 
-3. **Integração com Redes Sociais:**
-   - Vinculação de redes sociais ao perfil do usuário.
-   - Leitura de interações, páginas seguidas e atividades relacionadas à FURIA e esports.
+- Coleta de dados básicos (nome, endereço, CPF, interesses).
+- Upload de documentos e validação de identidade (futuro).
+- Vinculação com redes sociais e validação de interações com esports.
+- Compartilhamento de links de perfis e validação do conteúdo.
+- Interface amigável e responsiva.
 
-4. **Validação de Links de Perfis:**
-   - O sistema valida se o conteúdo dos links compartilhados pelo usuário é relevante para seu perfil de fã de esports, utilizando IA.
+## 🛠️ Tecnologias Utilizadas
 
-## Tecnologias Utilizadas
+- **HTML5**
+- **CSS3**
+- **JavaScript**
 
-- **Frontend:** HTML, CSS, JavaScript
-- **Backend:** Node.js, Express (futuro)
-- **Banco de Dados:** MongoDB (futuro)
+## 🚀 O que está por vir
+
+- Implementação do backend para autenticação e gerenciamento de dados.
+- Validação de identidade utilizando IA.
+- Integração com redes sociais para análise de interações com esports.
