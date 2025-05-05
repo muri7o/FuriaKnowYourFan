@@ -21,9 +21,10 @@
     <main>
         <section class="register-form">
             <div class="container">
-                <h2>Cadastro de Fã</h2>
-                <p class="form-intro">Preencha o formulário abaixo para começar sua jornada como um fã reconhecido da FURIA.</p>
-                
+                <div class="form-title">
+                    <h2 class="form-titulo">Cadastro de Fã</h2>
+                    <p class="form-intro">Preencha o formulário abaixo para começar sua jornada como um fã reconhecido da FURIA.</p>
+            </div>
                 <form action="{{ url_for('register') }}" method="POST" enctype="multipart/form-data">
                     <div class="form-progress">
                         <div class="progress-step active">1. Dados Pessoais</div>
@@ -49,8 +50,8 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="address">Endereço Completo <span>*</span></label>
-                            <textarea id="address" name="address" required></textarea>
+                            <label for="address">Endereço <span>*</span></label>
+                            <input id="address" name="address" required></input>
                         </div>
                         
                         
@@ -115,13 +116,13 @@
                     <!-- Etapa 3: Validação -->
                     <div class="form-section" id="validation">
                         <div class="form-group">
-                            <label for="photo">Foto de Rosto (para validação de identidade)<span>*</span></label>
+                            <label for="photo">Foto de Rosto (para validação de identidade) <span>*</span></label>
                             <input type="file" id="photo" name="photo" accept="image/*" required>
                             <p class="form-help">Envie uma foto sua para verificarmos sua identidade.</p>
                         </div>
 
                         <div class="form-group">
-                            <label for="document">Documento com Foto (RG, CNH)<span>*</span></label>
+                            <label for="document">Documento com Foto (RG, CNH) <span>*</span></label>
                             <input type="file" id="document" name="document" accept="image/*" required>
                             <p class="form-help">Envie uma foto do seu documento com foto para validação.</p>
                         </div>
@@ -135,7 +136,8 @@
 
                         <div class="form-nav">
                             <button type="button" class="btn btn-prev" onclick="prevSection()">Anterior</button>
-                            <button type="submit" class="btn">Finalizar Cadastro</button>
+                            <!-- <button type="submit" class="btn">Finalizar Cadastro</button> -->
+                            <a href="perfil.html" class="btn btn-form">Próximo</a>
                         </div>
                     </div>
                 </form>
